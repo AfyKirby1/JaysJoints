@@ -1,56 +1,57 @@
 import React from 'react';
 import { MapPin, Link as LinkIcon, Users } from 'lucide-react';
+import profilePic from '../assets/profile.jpg';
 
 const ProfileCard = () => {
-    return (
-        <div className="profile-column">
-            <div className="glass-panel profile-card">
-                <div className="profile-pic-container">
-                    <div className="profile-pic">
-                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=500&auto=format&fit=crop&q=60" alt="Jay" />
-                    </div>
-                    <div className="status-indicator online"></div>
-                </div>
+  return (
+    <div className="profile-column">
+      <div className="glass-panel profile-card">
+        <div className="profile-pic-container">
+          <div className="profile-pic">
+            <img src={profilePic} alt="Jay" />
+          </div>
+          <div className="status-indicator online"></div>
+        </div>
 
-                <div className="profile-info">
-                    <h1>Jay's Joints</h1>
-                    <p className="mood">Mood: 🎵 Creating</p>
+        <div className="profile-info">
+          <h1>Jay's Joints</h1>
+          <p className="mood">Mood: 🎵 Creating</p>
 
-                    <div className="stats">
-                        <span><MapPin size={14} /> NYC</span>
-                        <span><Users size={14} /> 4.2k Fans</span>
-                    </div>
+          <div className="stats">
+            <span><MapPin size={14} /> NYC</span>
+            <span><Users size={14} /> 4.2k Fans</span>
+          </div>
 
-                    <div className="actions">
-                        <button className="btn primary">Follow</button>
-                        <button className="btn">Message</button>
-                    </div>
-                </div>
+          <div className="actions">
+            <button className="btn primary">Follow</button>
+            <button className="btn">Message</button>
+          </div>
+        </div>
 
-                <div className="about-section">
-                    <h3>About Me</h3>
-                    <p>
-                        Independent artist producing beats and vibes.
-                        Blending retro synths with modern trap drums.
-                        Welcome to my digital space.
-                    </p>
-                    <a href="#" className="website-link"><LinkIcon size={14} /> jaysjoints.com</a>
-                </div>
+        <div className="about-section">
+          <h3>About Me</h3>
+          <p>
+            Independent artist producing beats and vibes.
+            Blending retro synths with modern trap drums.
+            Welcome to my digital space.
+          </p>
+          <a href="#" className="website-link"><LinkIcon size={14} /> jaysjoints.com</a>
+        </div>
+      </div>
+
+      <div className="glass-panel friends-panel">
+        <h3>Top Connections</h3>
+        <div className="friends-grid">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="friend-item">
+              <img src={`https://images.unsplash.com/photo-${1500000000000 + i}?w=100&auto=format&fit=crop&q=60`} alt="Friend" />
+              <span>Artist {i}</span>
             </div>
+          ))}
+        </div>
+      </div>
 
-            <div className="glass-panel friends-panel">
-                <h3>Top Connections</h3>
-                <div className="friends-grid">
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div key={i} className="friend-item">
-                            <img src={`https://images.unsplash.com/photo-${1500000000000 + i}?w=100&auto=format&fit=crop&q=60`} alt="Friend" />
-                            <span>Artist {i}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <style>{`
+      <style>{`
         .profile-column {
           display: flex;
           flex-direction: column;
@@ -202,8 +203,8 @@ const ProfileCard = () => {
           text-align: center;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ProfileCard;
