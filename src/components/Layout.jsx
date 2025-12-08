@@ -1,24 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Sun, Moon, Eye } from 'lucide-react';
 
 const Layout = ({ children }) => {
-    return (
-        <div className="app-layout">
-            {/* Top Navigation could go here */}
-            <nav className="top-nav glass-panel">
-                <div className="logo">JAY'S JOINTS</div>
-                <div className="nav-links">
-                    <a href="#" className="active">Home</a>
-                    <a href="#">Music</a>
-                    <a href="#">Merch</a>
-                    <a href="#">Contact</a>
-                </div>
-            </nav>
+  const [theme, setTheme] = useState('dark');
+  const [logoClicks, setLogoClicks] = useState(0);
 
-            <div className="container">
-                {children}
-            </div>
+  useEffect(() => {
+    // Check local storage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  }, []);
 
-            <style>{`
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
+  const handleLogoClick = () => {
+    const newClicks = logoClicks + 1;
+    setLogoClicks(newClicks);
+
+    if (newClicks >= 5) {
+      const newTheme = theme === 'psychedelic' ? 'dark' : 'psychedelic';
+      setTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+      setLogoClicks(0); // Reset
+      alert(newTheme === 'psychedelic' ? "👁️ YOU HAVE OPENED YOUR THIRD EYE 👁️" : "Reality restored.");
+    }
+  };
+
+  return (
+    <div className="app-layout">
+      {/* Top Navigation */}
+      <nav className="top-nav glass-panel">
+        <div
+          className="logo"
+          onClick={handleLogoClick}
+          style={{ cursor: 'pointer', userSelect: 'none' }}
+          title="Keep clicking to open your mind..."
+        >
+          JAY'S JOINTS {theme === 'psychedelic' && '👁️'}
+        </div>
+
+        <div className="nav-links">
+          <a href="#" className="active">Home</a>
+          <a href="#">Music</a>
+          <a href="#">Merch</a>
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+        </div>
+      </nav>
+
+      <div className="container">
+        {children}
+      </div>
+
+      <style>{`
         .app-layout {
           min-height: 100vh;
           display: flex;
@@ -36,6 +80,7 @@ const Layout = ({ children }) => {
           justify-content: space-between;
           align-items: center;
           z-index: 100;
+          transition: all 0.3s ease;
         }
 
         .logo {
@@ -44,13 +89,19 @@ const Layout = ({ children }) => {
           font-size: 1.25rem;
           letter-spacing: -0.05em;
           text-transform: uppercase;
-          background: linear-gradient(45deg, #fff, #aaa);
+          background: linear-gradient(45deg, var(--text-primary), var(--text-secondary));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          transition: transform 0.1s;
+        }
+
+        .logo:active {
+          transform: scale(0.95);
         }
 
         .nav-links {
           display: flex;
+          align-items: center;
           gap: 2rem;
         }
 
@@ -66,6 +117,24 @@ const Layout = ({ children }) => {
           color: var(--text-primary);
         }
 
+        .theme-toggle {
+          background: none;
+          border: none;
+          color: var(--text-secondary);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+          border-radius: 50%;
+          transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+          color: var(--accent-color);
+          background: rgba(255,255,255,0.1);
+        }
+
         .main-grid {
           display: grid;
           grid-template-columns: 320px 1fr;
@@ -77,10 +146,13 @@ const Layout = ({ children }) => {
           .main-grid {
             grid-template-columns: 1fr;
           }
+          .nav-links {
+            gap: 1rem;
+          }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Layout;
