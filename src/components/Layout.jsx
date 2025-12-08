@@ -62,6 +62,24 @@ const Layout = ({ children }) => {
         {children}
       </div>
 
+      {theme === 'psychedelic' && (
+        <div className="flying-objects">
+          {['🍄', '🛸', '👽', '🎵', '🍕', '👁️', '🌈', '👾', '🦄'].map((emoji, index) => (
+            <div
+              key={index}
+              className="floater"
+              style={{
+                left: `${Math.random() * 100}vw`,
+                animationDuration: `${Math.random() * 10 + 10}s`,
+                animationDelay: `${Math.random() * 5}s`
+              }}
+            >
+              {emoji}
+            </div>
+          ))}
+        </div>
+      )}
+
       <style>{`
         .app-layout {
           min-height: 100vh;
@@ -142,12 +160,42 @@ const Layout = ({ children }) => {
           padding-bottom: 120px; /* Space for player */
         }
 
+
         @media (max-width: 800px) {
           .main-grid {
             grid-template-columns: 1fr;
           }
           .nav-links {
             gap: 1rem;
+          }
+        }
+
+        /* Flying Objects Layer */
+        .flying-objects {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none; /* Let clicks pass through */
+          z-index: 50; /* Behind the glass panels if possible, or on top? On top makes it chaotic which is requested */
+          overflow: hidden;
+        }
+
+        .floater {
+          position: absolute;
+          bottom: -100px; /* Start below screen */
+          font-size: 3rem;
+          opacity: 0.8;
+          animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+          0% {
+            transform: translateY(0) rotate(0deg);
+          }
+          100% {
+            transform: translateY(-120vh) rotate(360deg);
           }
         }
       `}</style>
