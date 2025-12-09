@@ -62,6 +62,96 @@ body {
     radial-gradient(circle at 90% 80%, rgba(0, 255, 179, 0.05) 0%, transparent 40%);
 }
 
+/* Neon Nights Theme */
+[data-theme="neon"] {
+  --bg-primary: #050505;
+  --bg-secondary: rgba(255, 0, 153, 0.05);
+  --bg-glass: rgba(10, 10, 12, 0.8);
+  --glass-border: rgba(0, 243, 255, 0.3);
+
+  --accent-color: #00f3ff;
+  --accent-glow: rgba(0, 243, 255, 0.6);
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+}
+
+[data-theme="neon"] body {
+  background-image:
+    linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 153, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-color: #050505;
+}
+
+[data-theme="neon"] .glass-panel {
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.15), inset 0 0 20px rgba(0, 243, 255, 0.05);
+  border: 1px solid var(--glass-border);
+}
+
+[data-theme="neon"] .btn {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Oceanic Glass Theme */
+[data-theme="ocean"] {
+  --bg-primary: #021019;
+  --bg-secondary: rgba(100, 255, 218, 0.05);
+  --bg-glass: rgba(10, 25, 47, 0.7);
+  --glass-border: rgba(100, 255, 218, 0.15);
+
+  --accent-color: #64ffda;
+  --accent-glow: rgba(100, 255, 218, 0.3);
+  --text-primary: #e6f1ff;
+  --text-secondary: #8892b0;
+}
+
+[data-theme="ocean"] body {
+  background-image:
+    radial-gradient(circle at 50% 120%, rgba(100, 255, 218, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 0% 0%, rgba(20, 50, 80, 0.8) 0%, transparent 60%);
+  background-color: #021019;
+}
+
+/* Sunset Theme */
+[data-theme="sunset"] {
+  --bg-primary: #2d1b2e;
+  --bg-secondary: rgba(255, 158, 100, 0.05);
+  --bg-glass: rgba(45, 27, 46, 0.7);
+  --glass-border: rgba(255, 158, 100, 0.2);
+
+  --accent-color: #ff9e64;
+  --accent-glow: rgba(255, 158, 100, 0.4);
+  --text-primary: #ffd6cc;
+  --text-secondary: #cc8d80;
+}
+
+[data-theme="sunset"] body {
+  background-image:
+    linear-gradient(135deg, rgba(82, 34, 88, 0.3) 0%, rgba(255, 158, 100, 0.1) 100%);
+  background-color: #2d1b2e;
+}
+
+/* Forest Theme */
+[data-theme="forest"] {
+  --bg-primary: #0b1410;
+  --bg-secondary: rgba(212, 180, 131, 0.05);
+  --bg-glass: rgba(11, 20, 16, 0.75);
+  --glass-border: rgba(212, 180, 131, 0.15);
+
+  --accent-color: #d4b483;
+  --accent-glow: rgba(212, 180, 131, 0.3);
+  --text-primary: #e8f5e9;
+  --text-secondary: #8fa394;
+}
+
+[data-theme="forest"] body {
+  background-image:
+    radial-gradient(circle at 80% 10%, rgba(212, 180, 131, 0.1) 0%, transparent 40%),
+    linear-gradient(0deg, rgba(10, 40, 20, 0.3) 0%, transparent 100%);
+  background-color: #0b1410;
+}
+
 /* Psychedelic (Easter Egg) Theme */
 [data-theme="psychedelic"] {
   --bg-primary: #000000;

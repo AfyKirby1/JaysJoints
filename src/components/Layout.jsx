@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Eye } from 'lucide-react';
+import { Sun, Moon, Eye, Zap, Droplets, LayoutTemplate, Square, Sidebar, Sunset, Trees } from 'lucide-react';
 
 const Layout = ({ children }) => {
   const [theme, setTheme] = useState('dark');
+  const [layout, setLayout] = useState('left');
   const [logoClicks, setLogoClicks] = useState(0);
 
   useEffect(() => {
@@ -15,10 +16,21 @@ const Layout = ({ children }) => {
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const themes = ['dark', 'light', 'neon', 'ocean', 'sunset', 'forest'];
+    const currentIndex = themes.indexOf(theme);
+    // If current theme is psychedelic (or unknown), starts at 0 (dark)
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themes.length;
+    const newTheme = themes[nextIndex];
+
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
+  const toggleLayout = () => {
+    const layouts = ['left', 'right', 'focus'];
+    const nextLayout = layouts[(layouts.indexOf(layout) + 1) % layouts.length];
+    setLayout(nextLayout);
   };
 
   const handleLogoClick = () => {
@@ -34,6 +46,7 @@ const Layout = ({ children }) => {
       alert(newTheme === 'psychedelic' ? "👁️ YOU HAVE OPENED YOUR THIRD EYE 👁️" : "Reality restored.");
     }
   };
+
 
   return (
     <div className="app-layout">
@@ -52,13 +65,24 @@ const Layout = ({ children }) => {
           <a href="#" className="active">Home</a>
           <a href="#">Music</a>
           <a href="#">Merch</a>
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          <button className="theme-toggle" onClick={toggleLayout} title="Change Layout">
+            {layout === 'left' && <Sidebar size={20} />}
+            {layout === 'right' && <Sidebar size={20} style={{ transform: 'scaleX(-1)' }} />}
+            {layout === 'focus' && <Square size={20} />}
+          </button>
+          <button className="theme-toggle" onClick={toggleTheme} title="Switch Theme">
+            {theme === 'light' && <Sun size={20} />}
+            {theme === 'dark' && <Moon size={20} />}
+            {theme === 'neon' && <Zap size={20} />}
+            {theme === 'ocean' && <Droplets size={20} />}
+            {theme === 'sunset' && <Sunset size={20} />}
+            {theme === 'forest' && <Trees size={20} />}
+            {theme === 'psychedelic' && <Eye size={20} />}
           </button>
         </div>
       </nav>
 
-      <div className="container">
+      <div className="container" data-layout={layout}>
         {children}
       </div>
 
@@ -155,9 +179,34 @@ const Layout = ({ children }) => {
 
         .main-grid {
           display: grid;
-          grid-template-columns: 320px 1fr;
           gap: 2rem;
           padding-bottom: 120px; /* Space for player */
+          transition: all 0.5s ease;
+        }
+
+        /* Standard Left Sidebar */
+        .container[data-layout="left"] .main-grid {
+          grid-template-columns: 320px 1fr;
+        }
+
+        /* Right Sidebar Layout */
+        .container[data-layout="right"] .main-grid {
+          grid-template-columns: 1fr 320px;
+        }
+
+        .container[data-layout="right"] .sidebar-left {
+          order: 2;
+        }
+
+        /* Focus Mode (Single Column) */
+        .container[data-layout="focus"] .main-grid {
+          grid-template-columns: 1fr;
+          max-width: 700px; /* Twitter/Bluesky feed width */
+          margin: 0 auto;
+        }
+
+        .container[data-layout="focus"] .sidebar-left {
+          display: none;
         }
 
 
