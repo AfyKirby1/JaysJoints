@@ -8,6 +8,8 @@ Stack: React, Vite, Vanilla CSS
 - [x] Initialize Project
 - [x] Create Core Components (Layout, Profile, Feed, Player)
 - [x] Apply Glassmorphism Styling
+- [x] Add Modern Design Mode (Hero, Albums, Tracks, Feed)
+- [x] Implement Design Mode Toggle
 - [/] Documentation & Git Setup (In Progress)
 
 ## Backlog / Future Ideas

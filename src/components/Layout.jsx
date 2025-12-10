@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Eye, Zap, Droplets, LayoutTemplate, Square, Sidebar, Sunset, Trees } from 'lucide-react';
+import { Sun, Moon, Eye, Zap, Droplets, LayoutTemplate, Square, Sidebar, Sunset, Trees, Sparkles, Grid3x3 } from 'lucide-react';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, designMode, onDesignModeChange }) => {
   const [theme, setTheme] = useState('dark');
   const [layout, setLayout] = useState('left');
   const [logoClicks, setLogoClicks] = useState(0);
@@ -65,10 +65,19 @@ const Layout = ({ children }) => {
           <a href="#" className="active">Home</a>
           <a href="#">Music</a>
           <a href="#">Merch</a>
-          <button className="theme-toggle" onClick={toggleLayout} title="Change Layout">
-            {layout === 'left' && <Sidebar size={20} />}
-            {layout === 'right' && <Sidebar size={20} style={{ transform: 'scaleX(-1)' }} />}
-            {layout === 'focus' && <Square size={20} />}
+          {designMode === 'classic' && (
+            <button className="theme-toggle" onClick={toggleLayout} title="Change Layout">
+              {layout === 'left' && <Sidebar size={20} />}
+              {layout === 'right' && <Sidebar size={20} style={{ transform: 'scaleX(-1)' }} />}
+              {layout === 'focus' && <Square size={20} />}
+            </button>
+          )}
+          <button 
+            className="theme-toggle" 
+            onClick={onDesignModeChange} 
+            title={designMode === 'classic' ? 'Switch to Modern Design' : 'Switch to Classic Design'}
+          >
+            {designMode === 'classic' ? <Sparkles size={20} /> : <Grid3x3 size={20} />}
           </button>
           <button className="theme-toggle" onClick={toggleTheme} title="Switch Theme">
             {theme === 'light' && <Sun size={20} />}
@@ -82,7 +91,7 @@ const Layout = ({ children }) => {
         </div>
       </nav>
 
-      <div className="container" data-layout={layout}>
+      <div className="container" data-layout={layout} data-design-mode={designMode}>
         {children}
       </div>
 

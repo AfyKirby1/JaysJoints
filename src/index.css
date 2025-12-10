@@ -292,3 +292,30 @@ body {
   border-color: var(--accent-color);
   box-shadow: 0 0 16px var(--accent-glow);
 }
+
+/* --- MODERN DESIGN MODE --- */
+[data-design-mode="modern"] .container {
+  max-width: 1400px;
+  padding: 0 2rem;
+}
+
+[data-design-mode="modern"] .top-nav {
+  background: rgba(15, 15, 19, 0.9);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modern-layout {
+  width: 100%;
+  padding-bottom: 120px; /* Space for player */
+}
+
+/* Modern layout specific adjustments */
+[data-design-mode="modern"] .main-grid {
+  display: none; /* Hide classic layout grid */
+}
+
+/* Smooth transitions between modes */
+.container {
+  transition: all 0.4s ease;
+}

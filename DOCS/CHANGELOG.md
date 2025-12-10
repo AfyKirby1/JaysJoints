@@ -22,3 +22,14 @@
   - **Modern**: Sidebar Right.
   - **Focus**: Centered Feed (Sidebar hidden).
 - **Tools**: Added `launch.bat` for one-click startup.
+
+## [1.2.0] - 2025-12-09
+### Added
+- **Dual Design Modes**: Complete redesign toggle between "Classic" (Myspace-style) and "Modern" (Contemporary) layouts.
+- **Modern Layout Components**:
+  - **Hero Section**: Large visual hero with artist info, stats, and call-to-action buttons.
+  - **Album Grid**: Visual grid display of albums/EPs with hover effects and play buttons.
+  - **Track List**: Interactive track listing with play states, plays count, and actions.
+  - **Modern Feed**: Card-based update feed with images and event badges.
+- **Design Mode Toggle**: Button in navigation to switch between Classic and Modern designs.
+- **Persistent Preference**: Design mode choice saved to localStorage.
